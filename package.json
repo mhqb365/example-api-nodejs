@@ -1,0 +1,27 @@
+{
+  "name": "example-api-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "prod": "nodemon ./dist/index.js",
+    "build": "webpack --mode development --config webpack.config.js",
+    "deploy": "git add . && git commit -m \":rocket:\" && git push"
+  },
+  "dependencies": {
+    "axios": "^0.21.4",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-node-externals": "^3.0.0"
+  }
+}
