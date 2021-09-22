@@ -11,10 +11,15 @@
   },
   "dependencies": {
     "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^6.0.5"
+    "jsonwebtoken": "^8.5.1",
+    "lite-email-checker": "^1.0.0",
+    "mongoose": "^6.0.5",
+    "nodemailer": "^6.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",

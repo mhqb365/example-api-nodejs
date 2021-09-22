@@ -7,10 +7,10 @@ axios({
   url: "/user/register",
   method: "POST",
   data: {
-    username: "admin",
-    password: "admin",
-    email: "admin@gmail.com",
+    username: "mhqb365",
+    password: "QBao2020#!",
+    email: "mhqb365@gmail.com",
   },
 })
   .then((response) => console.log(response.data))
-  .catch((error) => console.error(error));
+  .catch((error) => console.error(error.response));

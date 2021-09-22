@@ -5,8 +5,7 @@ const UserMiddleware = {
     try {
       next();
     } catch (error) {
-      console.error(error);
-      res.status(404).send("Not found");
+      throw error;
     }
   },
 };

@@ -4,12 +4,20 @@ const app = express();
 const { checkEnv } = require("./src/config/env.config");
 const userRouter = require("./src/routes/user.route");
 const { connectDatabase } = require("./src/config/database.config");
+const cookieParser = require("cookie-parser");
 
 checkEnv();
 connectDatabase();
 
-app.use(cors());
+const corsOptions = {
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+app.use(cookieParser());
 app.use(express.json());
+
+app.get("/", (req, res) => res.send("API working"));
 
 app.use("/user", userRouter);
 

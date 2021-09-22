@@ -1,26 +1,27 @@
 const UserModel = require("../models/user.model");
 
 const UserService = {
-  async createUser(username, password, email) {
+  async checkUsernameExsit(username) {
     try {
-      const newUser = new UserModel({
-        username,
-        password,
-        email,
-      });
-      return await newUser.save();
+      return await UserModel.findOne({ username });
     } catch (error) {
-      console.log(error.message);
+      throw error;
     }
   },
-  async checkUser(username, password) {
+  async checkEmailExsit(email) {
     try {
-      return await UserModel.findOne({
-        username,
-        password,
-      });
+      return await UserModel.findOne({ email });
     } catch (error) {
-      console.log(error.message);
+      throw error;
+    }
+  },
+  async createUser(username, password, email) {
+    try {
+      const newUser = new UserModel({ username, password, email });
+
+      return await newUser.save();
+    } catch (error) {
+      throw error;
     }
   },
 };
