@@ -2,6 +2,7 @@ const {
   checkUsernameExsit,
   checkEmailExsit,
   createUser,
+  getUser,
 } = require("../services/user.service");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -80,9 +81,17 @@ const UserController = {
       next(error);
     }
   },
-  async profile() {
+  async profile(req, res, next) {
     try {
-      
+      const { username } = req.headers.authorize;
+      const user = await getUser(username);
+
+      return res.send({
+        _id: user._id.toString(),
+        username: user.username,
+        email: user.email,
+        permission: user.permission,
+      });
     } catch (error) {
       next(error);
     }

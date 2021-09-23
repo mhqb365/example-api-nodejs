@@ -16,8 +16,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
-
-app.get("/", (req, res) => res.send("API working"));
+app.use(express.static('public'))
 
 app.use("/user", userRouter);
 

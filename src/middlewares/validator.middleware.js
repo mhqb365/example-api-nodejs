@@ -3,6 +3,7 @@ const regexPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,24}$/;
 const regexEmail =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const liteEmailChecker = require("lite-email-checker");
+const jwt = require("jsonwebtoken");
 
 const ValidatorMiddleware = {
   async validateRegisterForm(req, res, next) {
@@ -43,7 +44,17 @@ const ValidatorMiddleware = {
   },
   async validateToken(req, res, next) {
     try {
-      
+      // console.log(req.cookies);
+      const { accessToken } = req.cookies;
+      if (!accessToken) throw "Unauthorized";
+
+      await jwt.verify(accessToken, process.env.SECRET, (error, decoded) => {
+        if (error) throw "Unauthorized";
+
+        // console.log(decoded);
+        req.headers.authorize = decoded;
+      });
+
       next();
     } catch (error) {
       next(error);

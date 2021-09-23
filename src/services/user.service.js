@@ -24,6 +24,13 @@ const UserService = {
       throw error;
     }
   },
+  async getUser(username) {
+    try {
+      return await UserModel.findOne({ username });
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 module.exports = UserService;
