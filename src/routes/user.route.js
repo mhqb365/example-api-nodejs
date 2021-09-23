@@ -11,6 +11,6 @@ const { authUser } = require("../middlewares/user.middleware");
 
 userRouter.post("/register", validateRegisterForm, register);
 userRouter.post("/login", validateLoginForm, login);
-userRouter.get("/profile", validateToken, profile);
+userRouter.get("/profile", validateToken, authUser, profile);
 
 module.exports = userRouter;

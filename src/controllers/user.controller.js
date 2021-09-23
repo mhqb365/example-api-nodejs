@@ -50,13 +50,14 @@ const UserController = {
     try {
       let { username, password } = req.body;
       const user = await checkUsernameExsit(username);
-      // console.log(user);
+      if (!user) throw "User not found";
 
       const testPassword = await bcrypt.compare(password, user.password);
       if (!testPassword) throw "Wrong password";
 
       const token = jwt.sign(
         {
+          _id: user._id.toString(),
           username: user.username,
           permission: user.permission,
         },
@@ -83,7 +84,7 @@ const UserController = {
   },
   async profile(req, res, next) {
     try {
-      const { username } = req.headers.authorize;
+      const { username } = req.headers.authorizer;
       const user = await getUser(username);
 
       return res.send({
